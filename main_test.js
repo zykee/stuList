@@ -15,28 +15,10 @@ function mainTest() {
     });
     let threeFunc = sinon.stub(main.Stub,'threeFunc').callsFake(function () {
         let num = main.Stub.getFuncNum();
-        console.log(num);
         switch(num)
         {
-            case 1: main.STU[main.count]=main.addStu();console.log(num);main.count++;console.log(num);console.log(main.count);break;
+            case 1: main.STU.push(main.addStu());break;
         }
-    });
-    let printt = sinon.stub(main.Stub,'printff').callsFake(function (STU) {
-        let str = `成绩单
-`;
-        str+=`姓名|数学|语文|英语|编程|平均分|总分
-=======================================
-`;
-        for(let i = 0;i<STU.length;i++)
-        {
-            str += `${STU[i].name}|${STU[i].grade.math}|${STU[i].grade.chin}|${STU[i].grade.eng}|${STU[i].grade.code}|${STU[i].ave}|${STU[i].totall}
-`;
-        }
-        str +=`=======================================
-全班分数的中位数:${main.midd(STU)}
-全班分数的平均数:${main.aver(STU)}
-`;
-        return str;
     });
     let expectStr = `成绩单
 姓名|数学|语文|英语|编程|平均分|总分
@@ -45,11 +27,8 @@ function mainTest() {
 =======================================
 全班分数的中位数:385.00
 全班分数的平均数:385.00
-
 `;
     main.Stub.threeFunc();
-    console.log(main.count);
-    console.log(main.STU);
     if(expectStr === main.Stub.printt(main.STU)){
         console.log(`test pass`);
     }
@@ -61,6 +40,5 @@ function mainTest() {
     stuIfo.restore();
     inputNum.restore();
     threeFunc.restore();
-    printt.restore();
 }
 mainTest();

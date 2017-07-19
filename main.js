@@ -4,7 +4,7 @@
 'use strict';
 const readline = require('readline-sync');
 let STU = [];
-let count = 0;
+//let count = 0;
 class Stu{
     constructor(name,id,eth,klass){
         this.name = name;
@@ -84,7 +84,7 @@ const Stub = {
         }
     },
     printt: function(STU) {
-        if(count === 0)
+        if(STU.length === 0)
         {
             console.log(`
  ----------------------------
@@ -115,7 +115,7 @@ const Stub = {
         switch(num)
         {
             case -1: Stub.threeFunc();break;
-            case 1: STU[count]=addStu();count++; Stub.threeFunc();break;
+            case 1: STU.push(addStu()); Stub.threeFunc();break;
             case 2: console.log(Stub.printt(STU));Stub.threeFunc();break;
             case 3: break;
         }
@@ -159,16 +159,16 @@ function midd(STU) {
     if(score.length%2===0)
         mid = ((score[score.length/2-1]+score[score.length/2+1])/2).toFixed(2);
     else
-        mid = score[parseInt(score.length/2)].toFixed(2);
+        mid = (score[parseInt(score.length/2)]);
     return mid;
 }
 
 
 //Stub.threeFunc();
-module.exports.midd = midd;
+//module.exports.midd = midd;
 module.exports.Stub = Stub;
-module.exports.aver = aver;
+//module.exports.aver = aver;
 module.exports.STU = STU;
 module.exports.addStu = addStu;
-module.exports.count = count;
+//module.exports.count = count;
 
