@@ -4,7 +4,8 @@
 'use strict';
 const readline = require('readline-sync');
 let STU = [];
-//let count = 0;
+//let mid = 0;
+//let ave = 0;
 class Stu{
     constructor(name,id,eth,klass){
         this.name = name;
@@ -83,6 +84,21 @@ const Stub = {
             return -1;
         }
     },
+    getInputId :function () {
+        let num = readline.question(`请输入学号（例如：2015211007 ...）
+：`);
+        let reg = /^(\d{10}\s)*\d{10}$/;
+        if(reg.test(num))
+        {
+            return num;
+        }
+        else
+        {
+            console.log(`请按照格式输入
+：`);
+            Stub.getInputId();
+        }
+    },
     printt: function(STU) {
         if(STU.length === 0)
         {
@@ -93,14 +109,39 @@ const Stub = {
         }
         else
         {
+            let num = Stub.getInputId();
+            let stuNum = num.split(' ');
+            let stuNeedOutput = [];
+            /*
+            for(let i = 0;i<stuNum.length;i++)
+            {
+                stuInputId[i] = parseInt(stuNum[i]);
+            }*/
+            for(let i = 0;i<stuNum.length;i++)
+            {
+                for(let j = 0;i<STU.length;j++)
+                {
+                    if(STU[j].id === stuNum[i])
+                    {
+                        stuNeedOutput[i]=STU[j];
+                        break;
+                    }
+                    if(j===STU.length-1 && STU[j] != stuNum[i])
+                    {
+                        console.log(`学号:${stuNum}不存在，请重新输入
+：`);
+                        Stub.printt(STU);
+                    }
+                }
+            }
             let str = `成绩单
 `;
             str+=`姓名|数学|语文|英语|编程|平均分|总分
 =======================================
 `;
-            for(let i = 0;i<STU.length;i++)
+            for(let i = 0;i<stuNeedOutput.length;i++)
             {
-                str += `${STU[i].name}|${STU[i].grade.math}|${STU[i].grade.chin}|${STU[i].grade.eng}|${STU[i].grade.code}|${STU[i].ave}|${STU[i].totall}
+                str += `${stuNeedOutput[i].name}|${stuNeedOutput[i].grade.math}|${stuNeedOutput[i].grade.chin}|${stuNeedOutput[i].grade.eng}|${stuNeedOutput[i].grade.code}|${stuNeedOutput[i].ave}|${stuNeedOutput[i].totall}
 `;
             }
             str +=`=======================================
@@ -144,6 +185,7 @@ function aver(STU) {
         ave += STU[i].totall;
     }
     ave = (ave/STU.length).toFixed(2);
+    console.log(ave);
     return ave;
 }
 function midd(STU) {
@@ -157,14 +199,14 @@ function midd(STU) {
         return a-b;
     });
     if(score.length%2===0)
-        mid = ((score[score.length/2-1]+score[score.length/2+1])/2).toFixed(2);
+        mid = ((score[score.length/2-1]+score[score.length/2])/2).toFixed(2);
     else
         mid = (score[parseInt(score.length/2)]);
     return mid;
 }
 
 
-//Stub.threeFunc();
+Stub.threeFunc();
 //module.exports.midd = midd;
 module.exports.Stub = Stub;
 //module.exports.aver = aver;
