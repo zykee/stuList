@@ -30,9 +30,9 @@ const Stub = {
     getInputStu : function () {
         let inPut = readline.question(`请输入学生信息
      姓名 学号 民族 班级
-例如：可可 201 汉族 1503
+例如：可可 2015211007 汉族 1503
 ：`);
-        let reg = /^[\u4e00-\u9fa5]{2,}\s\d+\s[\u4e00-\u9fa5]{2,}\s\d*$/;
+        let reg = /^[\u4e00-\u9fa5]{2,}\s\d{10}\s[\u4e00-\u9fa5]{2,}\s\d*$/;
         if(reg.test(inPut))
         {
             return inPut;
